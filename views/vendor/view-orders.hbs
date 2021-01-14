@@ -1,0 +1,31 @@
+<section>
+    <div class="container" style="padding-left:130px">
+         {{!-- <div class="row mt-4">
+           <a href="" class="btn btn-success ml-auto"></a>
+        </div> --}}
+        <table class="table mt-5">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Customer Name</th>
+      <th scope="col">Mobile No</th>
+      <th scope="col">Address</th>
+      <th scope="col">Date</th>
+      <th scope="col">Status</th>
+      
+    </tr>
+  </thead>
+  <body>
+      {{#each orders}}
+      <tr>
+          <th scope="row">1</th>
+          <td>{{this.deliveryDetails.name}}</td>
+          <td>{{this.deliveryDetails.mobile}}</td>
+          <td>{{this.deliveryDetails.address}}</td>
+          <td>{{this.date}}</td>
+          <td>{{this.status}}</td>
+       
+      </tr>
+      {{/each}}
+  </body>
+</section>

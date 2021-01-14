@@ -1,0 +1,116 @@
+
+<div class="hero">
+    <div class="nav-bar">
+        <div class="nav-logo">
+            <img src="/images/logo.png">
+        </div>    
+        <div class="nav-links" id="nav-links">
+            <i class="fa fa-close" onclick="closeMenu()"></i>
+                <ul>
+                    <a href="#"><li>HOME</li></a>
+                    <a href="#"><li>ABOUT</li></a>
+                    <a href="#"><li>CONTACT</li></a>
+                </ul>
+                {{!-- <button type="button" class="btn" >LOGIN</button>
+                <button type="button" class="btn" id="signup-btn" style='margin-right:16px'>SIGNUP</button> --}}
+     
+     <a href="/user/user-login" class="btn">LOGIN</a>           
+            
+             </div>
+           </div>
+       <i class="fa fa-bars" onclick="showMenu()"></i>
+        </div>
+       
+        <div class="banner-title">
+            <h1>Food <span>doestnt have <br> a religion.</span>it is a religion</h1>
+            <button type="button" class="btn">EXPLORE</button>
+        </div>
+        <div class="vertical-bar">
+            <div class="search-icons">
+                <i class="fa fa-th-list"></i>
+                <i class="fa fa-search"></i>
+            </div>
+            <div class="social-icons">
+              <i class="fa fa-facebook"></i>
+              <i class="fa fa-instagram"></i>
+              <i class="fa fa-twitter"></i>
+              <i class="fa fa-pinterest"></i>
+           </div>
+         </div>  
+</div>
+    {{!-- <div class="notifications">
+        <div class="contents">
+            <small>test sukanyajkjjkklllkll</small>
+            <p><a href="">PREV</a><a href="">NEXT</a></p>
+        </div>    
+        <div class="notification-img">
+            <img src="/images/logo.png">
+        </div>
+    </div>  
+  </div> --}}
+  
+  <script>
+    
+var show = document.getElementById("nav-links");
+var mobNo=  document.getElementById("mobNo");
+ 
+window.$("#log-btn").click(function () {
+	"use strict";
+	window.$("#ovrly").fadeIn();
+	window.$("#login").show();
+	window.$("#login").animate({top: "100"});
+});
+window.$("#ovrly").click(function () {
+	"use strict";
+	window.$("#ovrly").hide();
+	window.$("#login").hide();
+	window.$("#login").css("top", "-310px");
+});
+window.$("#cross").click(function () {
+	"use strict";
+	window.$("#ovrly").hide();
+	window.$("#login").hide();
+	window.$("#login").css("top", "-310px");
+});
+     
+      function showMenu(){
+          show.style.right = "0";
+
+      }
+       function closeMenu(){
+          show.style.right = "-200px";
+
+      }  
+         function sendOtp(){
+         
+        $.ajax({
+        url:'/send-otp/'+mobNo.value,
+        method:'get',
+        success:(response)=>{
+        if(response.status){
+        
+      }
+      
+    }
+  })
+}
+          
+        
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

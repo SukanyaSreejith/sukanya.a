@@ -1,0 +1,15 @@
+.form-box{
+    width: 2000px;
+    background-position: center;
+    padding-left: 300px;
+    font-family: sans-serif;
+    color: black;
+    background: white;
+    
+   }
+   .form-control{
+    background-color :lightgrey;
+    color:black;
+    border-style: none;
+
+   }

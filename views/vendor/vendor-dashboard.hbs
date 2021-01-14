@@ -1,0 +1,183 @@
+<section>
+   
+    <div class="container mt-5" style="padding-left:130px;font-family:'Lato';font-size:18;font-color:'#000'" > 
+      <div class="row" >
+           <div class="col-md-3" >
+             <div class="card" style="background:cornflowerblue;height:15rem" >
+              <div class="container">
+              <h3 class="text-left"><b></b>{{salesDet.totProducts}}</b></h3> 
+              <p>Total Products</p>
+              </div>
+             </div>
+           </div>
+            <div class="col-md-3 p-3" >
+             <div class="card" style="background:red;height:15rem" >
+              <div class="container">
+              <h3 class="text-left"><b>{{salesDet.itemSold}}</b></h3> 
+              <p>Item Sold</p> 
+              </div>
+             </div>
+           </div>
+              <div class="col-md-3 p-3" >
+             <div class="card" style="background:darkgoldenrod;height: 15rem" >
+              <div class="container">
+              <h3 class="text-left"><b>{{salesDet.totAmount}}</b></h3> 
+              <p>Total amount</p> 
+              </div>
+             </div>
+           </div>
+              <div class="col-md-3 p-3" >
+             <div class="card" style="background:lawngreen;height: 15rem" >
+              <div class="container">
+              <h3 class="text-left"><b>{{salesDet.totAmount}}</b></h3> 
+              <p>Sales Amount</p> 
+              </div>
+             </div>
+           </div>
+      </div>
+   </div>
+
+   </section>
+   
+  {{!-- <section>
+    <div class="container" > 
+    <canvas id="myChart"></canvas>
+    </div>
+  </section> --}}
+   
+   <div class="container mt-5" style="padding-left:130px"> 
+      <div class="row" >
+           <div class="col-md-6" >
+             <div class="card" style="background:rgba(255, 99, 132, 0.2);height:300px" >
+                <div class="container" style="width: 500px;">
+                  <canvas id="myChart"></canvas>
+                </div>
+             </div> 
+           </div>
+
+            <div class="col-md-6" >
+             <div class="card" style="background:rgba(255, 99, 132, 0.2);height:300px" >
+                 <div class="container" style="width: 500px;">
+                     <canvas id="myChart2"></canvas>
+
+                </div>
+             </div> 
+           </div>
+      </div> 
+  
+   </div>     
+  
+<script>
+    let myChart = document.getElementById('myChart').getContext('2d');
+    let myChart2 = document.getElementById('myChart2').getContext('2d');
+    
+    //Global options
+    Chart.defaults.global.defaultFontFamily = 'Lato';
+    Chart.defaults.global.defaultFontSize = 18;
+    Chart.defaults.global.defaultFontColor = '#777'
+
+
+    let barChart= new Chart(myChart,{
+      type:'pie',
+      data:{
+        labels:["This month","Last month"],
+        datasets:[{
+          lable:'This month',
+          data:[
+            {{salesDet.salesTot1}},
+            {{salesDet.salesTot2}}
+         ],
+         backgroundColor:[
+           'rgba(255, 99, 132, 0.2)',
+           'rgba(54, 162, 235, 0.2)'
+         ],
+         borderWidth:1,
+         borderColor:'#777',
+         hoverBorderWidth:2,
+         hoverBorderColor:'#000'
+
+        }]
+      },
+      options:{
+        title:{
+          display:true,
+          text:'Sales Report',
+          fontSize:20,
+          fontColor:'#000'
+        },
+        legend:{
+         // display:false,
+          position:'right',
+          labels:{
+            fontColor:'#000'
+          }
+        },
+        layout:{
+          padding:{
+            left:20,
+            right:0,
+            bottom:0,
+            top:0
+          }
+        },
+        tooltips:{
+          enabled:true
+        }
+      }
+    });
+
+
+    let barChart2= new Chart(myChart2,{
+      type:'doughnut',
+      data:{
+        labels:["This month","Last month"],
+        datasets:[{
+          lable:'This month',
+          data:[
+            200,
+            800
+         ],
+         backgroundColor:[
+           'rgba(255, 99, 132, 0.2)',
+           'rgba(54, 162, 235, 0.2)'
+         ],
+         borderWidth:1,
+         borderColor:'#777',
+         hoverBorderWidth:2,
+         hoverBorderColor:'#000'
+
+        }]
+      },
+      options:{
+        title:{
+          display:true,
+          text:'Total Sales in this month',
+          fontSize:20,
+          fontColor:'#000'
+        },
+        legend:{
+         // display:false,
+          position:'right',
+          labels:{
+            fontColor:'#000'
+          }
+        },
+        layout:{
+          padding:{
+            left:20,
+            right:0,
+            bottom:0,
+            top:0
+          }
+        },
+        tooltips:{
+          enabled:true
+        }
+      }
+    });
+
+  
+
+  
+</script>
+

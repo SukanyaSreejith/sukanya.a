@@ -1,0 +1,67 @@
+
+
+<div class="limiter">
+		<div class="container-login100" style="background-image: url('/images/pizza5.jpg');">
+			<div class="wrap-login100 p-t-190 p-b-30">
+				<form class="login100-form validate-form" action="/user/user-signup" method="POST">
+				<div class="login100-form-avatar">
+						<a href="/user-home">
+						 <img src="/images/LOGO.png" style="width: 140px:height:80px"> </a>
+						  <h2 class="text-center" style="color: white;">Signup</h2>
+					</div>
+					
+				
+                   <div class="wrap-input100 validate-input m-b-10" data-validate = "Name is required">
+						<input class="input100" type="text" name="name" placeholder="Your Name" required>
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-user"></i>
+						</span>
+					</div>
+                    <div class="wrap-input100 validate-input m-b-10" data-validate = "Mobile no is required">
+						<input class="input100" type="text" name="mobile" placeholder="Mobile No" required>
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-phone"></i>
+						</span>
+					</div>
+                    
+
+					<div class="wrap-input100 validate-input m-b-10" data-validate = "Username is required">
+						<input class="input100" type="text" name="email" placeholder="Username" required>
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-user"></i>
+						</span>
+					</div>
+
+					<div class="wrap-input100 validate-input m-b-10" data-validate = "Password is required">
+						<input class="input100" type="password" name="password" placeholder="Password" required>
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-lock"></i>
+						</span>
+					</div>
+			{{#if userSignupErr}}
+            <p class="error" style="color: red;font-size:medium;font-weight:bolder">User Already exists</p>
+            {{/if}}
+                   
+					<div class="container-login100-form-btn p-t-10">
+						<button class="login100-form-btn" type="submit">
+							Signup
+						</button>
+					</div> <br><br>
+
+					<div class="text-center w-full">
+						<a class="txt1" href="/user/user-login" style="color: white;font-size:medium">
+							Already have account?
+												
+						</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	
+	

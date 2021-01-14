@@ -1,0 +1,67 @@
+{{!-- <section>
+    <div class="container">
+         <div class="row mt-4">
+           <a href="/admin/add-category" class="btn btn-success ml-auto">Add Category</a>
+           
+        </div>
+        <table class="table mt-5">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Category Name</th>
+      <th scope="col">Actions</th>
+    
+    </tr>
+  </thead>
+  <tbody>
+     {{#each categories}}
+    <tr>
+      <th scope="row">1</th>
+      <td>{{this.categoryname}}</td>
+    
+      <td>
+        <a href="/admin/edit-category/{{this._id}}" class="btn btn-primary">Edit</a>
+        <a href="/admin/delete-category/{{this._id}}" class="btn btn-danger" onclick="return confirm('Are you sure to delete {{this.categoryname}}')">Delete</a>
+        </td>
+    </tr>
+    {{/each}}
+    
+  </tbody>
+</table>
+    </div>
+</section> --}}
+
+<section>
+  
+    <div class="container" id="table-align">
+         <div class="row mt-4" >
+           <a href="/admin/add-category" class="btn btn-primary pull-right" >Add Category</a>
+           
+    </div>
+        <table class="table">
+  <thead>
+    <tr>
+      <th><h1>ID</h1></th>
+      <th><h1>CATEGORY NAME</h1></th>
+      <th><h1>ACTIONS</h1></th>
+    
+    </tr>
+  </thead>
+  <tbody>
+     {{#each categories}}
+    <tr>
+      <th scope="row">1</th>
+      <td>{{this.categoryname}}</td>
+      <td>
+      {{!-- <a href="/admin/edit-category/{{this._id}}" class="btn btn-primary">Edit</a> --}}
+      <a href="/admin/delete-category/{{this._id}}" class="btn btn-danger" onclick="return confirm('Are you sure to delete {{this.categoryname}}')">Delete</a>
+      </td>
+    </tr>
+    {{/each}}
+    
+  </tbody>
+</table>
+    </div>
+</section>
+
+

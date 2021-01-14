@@ -1,0 +1,107 @@
+	
+  <div class="limiter">
+		<div class="container-login100" style="background-image: url('/images/pizza5.jpg');">
+		   <a href=""></a>
+			<div class="wrap-login100 p-t-190 p-b-30">
+				<form name="myForm" class="login100-form validate-form" action="/user/user-login" method="POST" onsubmit="return validateForm()">
+			       
+					<div class="login100-form-avatar">
+						<a href="/user-home">
+						 <img src="/images/LOGO.png" style="width: 140px:height:80px"> </a>
+						  <h2 class="text-center" style="color: white;">Login</h2>
+					</div>
+			    
+					<div class="wrap-input100 validate-input m-b-10" data-validate = "Username is required">
+			
+						<input class="input100" type="text" name="email" placeholder="Username" required>
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-user"></i>
+						</span>
+		
+					</div>
+
+					<div class="wrap-input100 validate-input m-b-10" data-validate = "Password is required">
+						<input class="input100" type="password" name="password" placeholder="Password" required>
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-lock"></i>
+						</span>
+									{{#if loginErr}}
+            <p class="error" style="color: red;font-size:medium;font-weight:bolder">Invalid username or password</p>
+            {{/if}}
+					</div>
+                    {{!-- <p style="color: yellow;">_________________________OR__________________________</p><br><br>
+                     --}}
+                    {{!-- <div class="wrap-input100 validate-input m-b-10" data-validate = "Mobile No is required">
+						<input class="input100" type="mobile" name="mobile" placeholder="Mobile No" id="mobNo" value="+91">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-phone"></i>
+						</span>
+					</div>
+                    <a   class="login100-form-btn" onclick="sendOtp()" >Send OTP</a><br><br><br>
+                      <div class="wrap-input100 validate-input m-b-10" data-validate = "OTP is required">
+						<input class="input100" type="otp" name="otp" placeholder="OTP">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-lock"></i>
+						</span>
+					</div> --}}
+
+					<div class="container-login100-form-btn p-t-10">
+						<button class="login100-form-btn" type="submit">
+							Login
+						</button>
+					</div>
+{{!-- 
+					<div class="text-center w-full p-t-25 p-b-230">
+						<a href="#" class="txt1">
+							Forgot Username / Password?
+						</a>
+					</div> --}}
+                    <br><br>
+					<div class="text-center w-full">
+						<a class="txt1" href="/user/otp-login" style="color: white;font-size:medium">
+							OTP Login?							
+						</a>
+					</div>
+
+						<div class="text-center w-full">
+						<a class="txt1" href="/user/user-signup" style="color: white;font-size:medium">
+							Create new account?							
+						</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		function sendOtp(){
+		var mobNo=  document.getElementById("mobNo");
+         
+        $.ajax({
+        url:'/send-otp/'+mobNo.value,
+        method:'get',
+        success:(response)=>{
+        if(response.status){
+        
+           }
+         }
+       })
+     }
+
+	 function validateForm() {
+     var x = document.forms["myForm"]["email"].value;
+     if (x == "") {
+        alert("Enter email id");
+    return false;
+	var x = document.forms["myForm"]["email"].value;
+     if (x == "") {
+        alert("Enter password");
+    return false;
+  }
+}
+	</script>
+	

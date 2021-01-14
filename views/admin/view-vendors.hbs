@@ -1,0 +1,38 @@
+<section>
+  
+    <div class="container" id="table-align">
+         <div class="row mt-4" >
+           <a href="/admin/add-vendor" class="btn btn-primary pull-right" >Add vendor</a>
+           
+         </div>
+        <table class="table">
+  <thead>
+    <tr>
+      <th><h1>ID</h1></th>
+      <th><h1>VENDOR NAME</h1></th>
+      <th><h1>SHOP NAME</h1></th>
+      <th><h1>LOGO</h1></th>
+      <th><h1>ACTIONS</h1></th>
+    
+    </tr>
+  </thead>
+  <tbody>
+     {{#each vendors}}
+    <tr>
+      <th scope="row">1</th>
+      <td>{{this.name}}</td>
+      <td>{{this.shopname}}</td>
+       <td><img style="width:50px;height:50px" src="/vendor-images/{{this._id}}.jpg" alt=""</td>
+      <td>
+        <a href="/admin/edit-vendor/{{this._id}}" class="btn btn-primary">Edit</a>
+        <a href="/admin/block-vendor/{{this._id}}" class="btn btn-danger" onclick="return confirm('Are you sure to block {{this.name}}')">Block</a>
+        </td>
+    </tr>
+    {{/each}}
+    
+  </tbody>
+</table>
+    </div>
+</section>
+
+

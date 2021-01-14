@@ -1,0 +1,74 @@
+
+ 
+ 
+ <div class="limiter">
+		<div class="container-login100" style="background-image: url('/images/pizza5.jpg');">
+			<div class="wrap-login100 p-t-190 p-b-30">
+				<form class="login100-form validate-form" action="/user/user-login" method="POST">
+			
+					<div class="login100-form-avatar">
+						<a href="/user-home">
+						 <img src="/images/LOGO.png" style="width: 140px:height:80px"> </a><br>
+						  <h3 class="text-center" style="color: white;">OTP Login</h3>
+					</div>
+
+                    <div class="wrap-input100 validate-input m-b-10" data-validate = "Mobile No is required">
+					 <input class="input100" type="mobile" name="mobile" value="+91" placeholder="Mobile No" id="mobNo"  required>
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-phone"></i>
+						</span>
+					</div>
+                    <a   class="login100-form-btn" onclick="sendOtp()" >Send OTP</a><br><br><br>
+                      <div class="wrap-input100 validate-input m-b-10" data-validate = "OTP is required">
+						<input class="input100" type="otp" name="otp" placeholder="OTP" required>
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-lock"></i>
+						</span>
+					</div>
+
+					<div class="container-login100-form-btn p-t-10">
+						<button class="login100-form-btn" type="submit">
+							Login
+						</button>
+					</div>
+
+				   <br><br>
+					
+	                    <div class="text-center w-full">
+						<a class="txt1" href="/user/user-login" style="color: white;font-size:medium">
+							Already have account?							
+						</a>
+					   </div>
+						<div class="text-center w-full">
+						<a class="txt1" href="/user/user-signup" style="color: white;font-size:medium">
+							Create new account?							
+						</a>
+					   </div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		function sendOtp(){
+		var mobNo=  document.getElementById("mobNo");
+        if(mobNo.value!="+917907839670"){
+             alert("Message is restricted to registered No only")
+             return false
+        }else{
+            alert("jshdkjs")
+        }
+        $.ajax({
+        url:'/send-otp/'+mobNo.value,
+        method:'get',
+        success:(response)=>{
+        if(response.status){
+        
+           }
+         }
+       })
+     }
+	</script>
+	

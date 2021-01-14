@@ -1,0 +1,111 @@
+{{!-- 
+   <section>
+    <div class="container mt-5" id="product-box">
+      <div class="row">
+         {{#each products}}
+        
+         <div class="col-md-3 p-3" >
+             <div class="card" id="card-row" >
+                 <img
+                 src="/product-images/{{this._id}}.jpg"
+                 class="card-img-top" alt="Card image cap" style="height: 15rem;"> 
+                 <div class="card-body">
+                     <h5 class="card-title">{{this.name}}</h5>
+                     <p class="card-text">Rs.{{this.price}}</p>
+                     <p id="vname">{{this.vendorname}}</p>
+                   
+                         <input type="text" name="vendorId" id="{{this.vendor}}" value="{{this.vendor}}" hidden >
+                        
+                     <button onclick="addToCart('{{this._id}}','{{this.vendorname}}')" class="btn btn-primary">Add to Cart</button>
+              
+                  </div>
+               </div>
+        </div>
+        {{/each}}
+    
+
+      </div>
+    </div>
+  </section>
+  --}}
+
+{{!--   
+<section class="on-sale">
+  <div class="container">
+
+
+  <div class="section-title text-center">
+                <h3>Menu</h3>
+                <p>Quisque eget nisl id nulla sagittis auctor quis id. Aliquam quis vehicula enim, non aliquam risus.</p>
+            </div><!-- end title -->
+
+  <div class="row">
+  {{#each products}}
+  <div class="col-md-3">
+  <div class="product-top">
+    <img  src="/product-images/{{this._id}}.jpg" style="height: 15rem">
+    <div class="overlay-right">
+      <button type="button" class="btn btn-secondary" title="Quick buy">
+        <i class="fa fa-eye"></i>
+      </button>
+       <button type="button" class="btn btn-secondary" title="Add to wish list">
+        <i class="fa fa-heart-o"></i>
+      </button>
+       <button type="button" class="btn btn-secondary" title="Add to cart">
+        <i class="fa fa-shopping-cart"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="product-bottom text-center">
+    <i class="fa fa-star"></i>
+    <i class="fa fa-star"></i>
+    <i class="fa fa-star"></i>
+    <i class="fa fa-star"></i>
+    <i class="fa fa-star-half-o"></i>
+    <h3>{{this.name}}</h3>
+    <h5>Rs.{{this.price}}</h5>
+    {{!-- <h5>{{this.vendorname}}</h5> --}}
+    {{!-- <input type="text" name="vendorId" id="{{this.vendor}}" value="{{this.vendor}}" hidden >
+    <button onclick="addToCart('{{this._id}}','{{this.vendorname}}')" class="btn btn-primary">Add to Cart</button>
+  </div>  
+  </div>
+  {{/each}}
+  </div>
+  </div>
+   
+</section>  --}}
+
+
+ <div id="menu" class="section lb">
+        <div class="container-fluid">
+            <div class="section-title text-center">
+                <h3 style="font-family: Verdana, Geneva, Tahoma, sans-serif;">Our Menu</h3>
+                <h4 >Enjoy Your meal....</h4>
+            </div><!-- end title -->
+
+            <div class="row">
+               {{#each products}}
+				    <div class="col-md-3">
+            <div class="services-inner-box">
+						<div class="ser-icon">
+
+							<img src="/product-images/{{this._id}}.jpg" class="img-fluid" style="height: 25rem;width:25rem">
+             
+						</div>
+             
+   
+						<h2>{{this.name}}</h2>
+            <p>{{this.vendorname}}</p>
+						<a  href="#">Rs.{{this.price}}</a>
+             <input type="text" name="vendorId" id="{{this.vendor}}" value="{{this.vendor}}" hidden >
+             <button onclick="addToCart('{{this._id}}','{{this.vendorname}}')" class="btn btn-primary" style="background: black;font-size:smaller;color:white;font-weight:bold">Add to Cart</button>
+ 
+						</div>
+            </div><!-- end col -->
+             {{/each}}
+            </div><!-- end row -->
+        </div><!-- end container -->
+    </div><!-- end section -->
+
+

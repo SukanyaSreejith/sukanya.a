@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <title>KingOfPastha</title>
+        <link rel="icon" href="/images/LOGO.png" type = "image/x-icon"> 
+        <!-- Mobile Specific Meta -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <!-- Stylesheets -->
+    
+
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
+        <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+        <script src= "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"> </script> 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+
+        <script src="/javascripts/script.js"></script>
+           
+         
+        <link rel="stylesheet" href="/stylesheets/{{style}}" />
+        <link rel="stylesheet" href="/stylesheets/piechart.css"/>
+
+        {{#if tableStyle}}
+        <link rel="stylesheet" href="/stylesheets/table.css" />
+        <link rel="stylesheet" href="/stylesheets/sidebar.css" />
+
+        {{/if}}
+        {{#if wrtPage}}
+        <link rel="stylesheet" href="/stylesheets/add-edit.css" />
+        {{/if}}
+
+        {{#if landPage}}
+         <link rel="stylesheet" href="/stylesheets/user-page.css" />
+         {{/if}}
+  
+      
+    </head>
+    <body >
+     
+       {{#if admin}}
+       {{>admin-header}}
+       {{/if}}
+      
+       {{#if user}}
+       <link rel="stylesheet" href="/stylesheets/user-header.css" />
+       {{>user-header}}
+       {{/if}}
+       
+       {{#if vendor}}
+       {{>vendor-header}}
+       {{/if}}
+   
+{{{body}}}
+       <!-- ALL JS FILES -->
+    <script src="/javascripts/all.js"></script>
+	<!-- Camera Slider -->
+	<!-- <script src="js/jquery.mobile.customized.min.js"></script> -->
+	<!-- <script src="js/jquery.easing.1.3.js"></script>  -->
+	<script src="/javascripts/parallaxie.js"></script>
+	<!-- <script src="js/headline.js"></script> -->
+	<!-- <script src="js/owl.carousel.js"></script> -->
+	<!-- <script src="js/jquery.nicescroll.min.js"></script> -->
+	<!-- Contact form JavaScript -->
+    <!-- <script src="js/jqBootstrapValidation.js"></script> -->
+    <script src="/javascripts/contact_me.js"></script>
+    <!-- ALL PLUGINS -->
+
+    </body>
