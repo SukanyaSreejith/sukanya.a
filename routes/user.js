@@ -157,10 +157,10 @@ router.get('/about',(req,res)=>{
   res.render('user/about',{style})
 })
 
-router.get('/contact',(req,res)=>{
-  let style='user-common.css' 
-  res.render('user/contact',{style})
-})
+// router.get('/contact',(req,res)=>{
+//   let style='user-common.css' 
+//   res.render('user/contact',{style})
+// })
 
 router.post('/user-signup',(req,res)=>{
   userHelpers.doSignup(req.body).then((response)=>{ 
