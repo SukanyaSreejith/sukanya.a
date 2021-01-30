@@ -1,36 +1,5 @@
-{{!-- <section>
-    <div class="container">
-         <div class="row mt-4">
-           <a href="/admin/add-category" class="btn btn-success ml-auto">Add Category</a>
-           
-        </div>
-        <table class="table mt-5">
-  <thead>
-    <tr>
-      <th scope="col">Id</th>
-      <th scope="col">Category Name</th>
-      <th scope="col">Actions</th>
-    
-    </tr>
-  </thead>
-  <tbody>
-     {{#each categories}}
-    <tr>
-      <th scope="row">1</th>
-      <td>{{this.categoryname}}</td>
-    
-      <td>
-        <a href="/admin/edit-category/{{this._id}}" class="btn btn-primary">Edit</a>
-        <a href="/admin/delete-category/{{this._id}}" class="btn btn-danger" onclick="return confirm('Are you sure to delete {{this.categoryname}}')">Delete</a>
-        </td>
-    </tr>
-    {{/each}}
-    
-  </tbody>
-</table>
-    </div>
-</section> --}}
 
+{{!-- 
 <section>
   
     <div class="container" id="table-align">
@@ -53,7 +22,7 @@
       <th scope="row">1</th>
       <td>{{this.categoryname}}</td>
       <td>
-      {{!-- <a href="/admin/edit-category/{{this._id}}" class="btn btn-primary">Edit</a> --}}
+      <a href="/admin/edit-category/{{this._id}}" class="btn btn-primary">Edit</a>
       <a href="/admin/delete-category/{{this._id}}" class="btn btn-danger" onclick="return confirm('Are you sure to delete {{this.categoryname}}')">Delete</a>
       </td>
     </tr>
@@ -63,5 +32,53 @@
 </table>
     </div>
 </section>
+
+ --}}
+
+
+<div class="col-10" style="text-align: justify;margin-top:100px;">
+  {{#if Remove}}
+   <p class="error" style="color: white;font-size:medium;font-weight:bolder">Item removed</p>
+   {{/if}}
+  <h2>View Categories</h2> 
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>CATEGORY NAME</th>
+        <th>ACTIONS</th>
+      </tr>
+    </thead>
+    <tbody>
+    {{#each categories}}
+      <tr>
+      <th scope="row">1</th>
+     <td style="width: fit-content;">{{this.categoryname}}</td>
+    <td>
+        <a href="/admin/edit-vendor/{{this._id}}" class="btn btn-primary">Edit</a>
+        <a href="/admin/block-vendor/{{this._id}}" class="btn btn-danger" onclick="return confirm('Are you sure to block {{this.name}}')">Block</a>
+    </td>
+    </tr> 
+   {{/each}}
+    </tbody>
+  </table>
+  
+     <div class="float-right pr-5"> 
+     <a href="/admin/add-category" class="btn btn-primary mt-3" style="background: light;font-size:medium;color:white;font-weight:bold;width:200px;height:40px" ><b>Add Category</b></a> 
+    </div>
+     </div>
+     </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
 
 

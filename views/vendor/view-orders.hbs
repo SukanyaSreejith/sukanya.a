@@ -1,9 +1,5 @@
-<section>
-    <div class="container" style="padding-left:130px">
-         {{!-- <div class="row mt-4">
-           <a href="" class="btn btn-success ml-auto"></a>
-        </div> --}}
-        <table class="table mt-5">
+<div class="col-10" style="text-align: justify;margin-top:75px">
+           <table class="table">
   <thead>
     <tr>
       <th scope="col">Id</th>
@@ -15,17 +11,38 @@
       
     </tr>
   </thead>
-  <body>
+  <tbody>
       {{#each orders}}
       <tr>
           <th scope="row">1</th>
           <td>{{this.deliveryDetails.name}}</td>
           <td>{{this.deliveryDetails.mobile}}</td>
           <td>{{this.deliveryDetails.address}}</td>
-          <td>{{this.date}}</td>
-          <td>{{this.status}}</td>
+          <td>{{this.date2}}</td>
+          {{!-- <td>{{this.status}}</td> --}}
+           <td>
+                <div class="dropdown">
+                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        Active
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">Delivered</a>
+                        <a class="dropdown-item" href="#">Pending</a>
+                         <a class="dropdown-item" href="#">shipped</a>
+                    </div>
+                </div>
+            </td>
        
       </tr>
       {{/each}}
-  </body>
-</section>
+  </tbody>
+</div>
+
+
+<script>
+  $(function(){
+   $(".dropdown-menu").on('click', 'a', function(){
+       $(this).parents('.dropdown').find('button').text($(this).text());
+   });
+});
+</script>

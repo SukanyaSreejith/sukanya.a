@@ -141,17 +141,39 @@ getSalesDet:()=>{
     let products=await db.get().collection(collection.PRODUCT_COLLECTION).find().toArray()
     let orders=await db.get().collection(collection.ORDER_COLLECTION).find().toArray()
 
+    var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    var today = new Date();
+    var thisMonth = months[today.getMonth()]
+    var prevMonthNo = today.getMonth()
+    if(prevMonthNo===0){
+        var prevMonth=months[11]
+    }else{
+        var prevMonth=months[prevMonthNo]
+    }
+
     var i=0 
     let totAmount=0
+    let salesTot1=0
+    let salesTot2=0
+
     for (i = 0; i < orders.length; i++) { 
         totAmount=totAmount+ orders[i].totalAmount
+        date=orders[i].date
+           month=months[date.getMonth()]
+           if(month===thisMonth){
+               salesTot1 = salesTot1 + orders[i].totalAmount
+           }
+           if(month===prevMonth){
+               salesTot2 = salesTot2 + orders[i].totalAmount
+           }
     }
 
     let salesObj={
       totProducts:products.length,
       itemSold:orders.length,
-      totAmount:totAmount
-
+      totAmount:totAmount,
+      salesTot1:salesTot1,
+      salesTot2:salesTot2
     }
     resolve(salesObj)
 

@@ -9,20 +9,27 @@ const verifyLogin=(req,res,next)=>{
     next()
   }else{
     let style="user-login.css"
-    res.redirect('/vendor/vendor-login',{style,vendor:true})
+    res.redirect('/vendor/vendor-login')
   }
 }
 
+router.get('/vendor-home',(req,res)=>{
+  let style='user-home.css' 
+  res.render('vendor/vendor-home',{style})
+})
 router.get('/vendor-dashboard', verifyLogin,(req,res)=>{
-  res.render('vendor/vendor-dashboard',{vendor:true,vendordashboard:true,tableStyle:true})
+  vendorHelpers.getSalesDet(req.session.vendor._id).then((salesDet)=>{
+  res.render('vendor/vendor-dashboard',{vendor:true,salesDet})
 });
+})
 router.get('/vendor-login',(req,res)=>{
-  if(req.session.vendorLoggedIn){    
-    res.render('vendor/vendor-dashboard',{vendor:true,vendordashboard:true,tableStyle:true})
-   
+  if(req.session.vendorLoggedIn){  
+     vendorHelpers.getSalesDet(req.session.vendor._id).then((salesDet)=>{
+    res.render('vendor/vendor-dashboard',{vendor:true,salesDet})
+    })
   }else{
     let style="user-login.css"
-    res.render('vendor/vendor-login',{"loginErr":req.session.vendorLoginErr,style,vendor:true})
+    res.render('vendor/vendor-login',{style})
     req.session.vendorLoginErr=false
   }
   
@@ -34,7 +41,7 @@ router.post('/vendor-login',(req,res)=>{
       req.session.vendor=response.vendor
       req.session.vendorLoggedIn=true
       vendorHelpers.getSalesDet(req.session.vendor._id).then((salesDet)=>{
-      res.render('vendor/vendor-dashboard',{vendor:true,vendordashboard:true,tableStyle:true,salesDet})
+      res.render('vendor/vendor-dashboard',{vendor:true,salesDet})
       })
     }else{
       req.session.vendorLoginErr=true
@@ -45,22 +52,25 @@ router.post('/vendor-login',(req,res)=>{
   })
 })
 router.get('/logout',(req,res)=>{
-  req.session.vendor=null
   req.session.vendorLoggedIn=false
-  res.redirect('/vendor/vendor-login')
+  req.session.vendor=null
+  
+  res.redirect('/vendor/vendor-home')
 })
 
-router.get('/view-products', function(req, res, next) {
-  vendorHelpers.getAllProducts().then((products)=>{
+router.get('/view-products', verifyLogin,function(req, res, next) {
+console.log("session");
+  console.log(req.session.vendor);
+  vendorHelpers.getAllProducts(req.session.vendor.shopname).then((products)=>{
     console.log(products);
-    res.render('vendor/view-products',{products,vendordashboard:true,vendor:true,tableStyle:true})
+    res.render('vendor/view-products',{products,vendor:true})
 
   })
   
 });
 
 router.get('/add-product', function(req, res) {
-  res.render('vendor/add-product',{vendordashboard:true,vendor:true,wrtPage:true,tableStyle:true})
+  res.render('vendor/add-product',{vendor:true})
   });
   
   router.post('/add-product',(req,res)=>{
@@ -72,10 +82,7 @@ router.get('/add-product', function(req, res) {
       
      image.mv('./public/product-images/'+id+'.jpg',(err,done)=>{
         if(!err){
-          vendorHelpers.getAllProducts().then((products)=>{
-         
-          res.render("vendor/view-products",{products,vendordashboard:true,vendor:true,tableStyle:true})
-          })
+          res.redirect('/vendor/view-products')
         }else{
           console.log(err);
         }
@@ -88,9 +95,8 @@ router.get('/add-product', function(req, res) {
   router.get('/delete-product/:id',(req,res)=>{
     let proId=req.params.id
      vendorHelpers.deleteProduct(proId).then((response)=>{
-      vendorHelpers.getAllProducts().then((products)=>{
       res.redirect('/vendor/view-products')
-      })
+      
     })
   })
 
@@ -105,7 +111,7 @@ router.get('/add-product', function(req, res) {
     vendorHelpers.updateProduct(req.params.id,req.body).then(()=>{
     })
     vendorHelpers.getAllProducts().then((products)=>{
-     res.redirect('/vendor/view-products',{products,vendordashboard:true,vendor:true,tableStyle:true})
+     res.redirect('/vendor/view-products')
       if(req.files.Image){
         let image=req.files.image
         image.mv('./public/product-images/'+id+'.jpg')
@@ -115,8 +121,17 @@ router.get('/add-product', function(req, res) {
   })
   router.get('/view-orders',async(req,res)=>{
     let orders=await vendorHelpers.getUserOrders()
-    res.render('vendor/view-orders',{orders,vendor:true,vendordashboard:true,tableStyle:true})
+    res.render('vendor/view-orders',{orders,vendor:true})
   })
 
+  router.get('/sales-report',async(req,res)=>{
+    res.render('vendor/sales-report',{vendor:true})
+  })
+  router.post('/sales-report',async(req,res)=>{ 
+    console.log("session");
+    console.log(req.session.vendor);
+    let reportData=await vendorHelpers.salesReport(req.session.vendor.shopname,req.body)
+    res.render('vendor/sales-report-table',{reportData,vendor:true})
+  })
 
 module.exports = router;

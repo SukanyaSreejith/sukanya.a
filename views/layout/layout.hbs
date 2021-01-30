@@ -8,11 +8,9 @@
         <!-- Mobile Specific Meta -->
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <!-- Stylesheets -->
-    
 
         
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>        
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
         <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
@@ -37,6 +35,7 @@
         {{#if landPage}}
          <link rel="stylesheet" href="/stylesheets/user-page.css" />
          {{/if}}
+         
   
       
     </head>
@@ -44,6 +43,7 @@
      
        {{#if admin}}
        {{>admin-header}}
+        <link rel="stylesheet" href="/stylesheets/user-header.css" />
        {{/if}}
       
        {{#if user}}
@@ -52,6 +52,7 @@
        {{/if}}
        
        {{#if vendor}}
+        <link rel="stylesheet" href="/stylesheets/user-header.css" />
        {{>vendor-header}}
        {{/if}}
    
@@ -68,6 +69,6 @@
 	<!-- Contact form JavaScript -->
     <!-- <script src="js/jqBootstrapValidation.js"></script> -->
     <script src="/javascripts/contact_me.js"></script>
-    <!-- ALL PLUGINS -->
+    
 
     </body>

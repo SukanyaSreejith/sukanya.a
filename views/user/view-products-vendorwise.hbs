@@ -1,0 +1,30 @@
+
+
+ <div id="menu" class="section lb">
+        <div class="container-fluid">
+            <div class="section-title text-center">
+                <h3 style="font-family:'Luckiest Guy', cursive;color:red">Enjoy your meal</h3>
+             
+            </div><!-- end title -->
+            <div class="row">
+               {{#each products}}
+				    <div class="col-md-3">
+            <div class="services-inner-box">
+						<div class="ser-icon">
+						<img src="/product-images/{{this._id}}.jpg" class="img-fluid" style="height: 25rem;width:25rem">
+             
+						</div>
+						<h2>{{this.name}}</h2>
+            <p>{{this.vendorname}}</p>
+						<a  href="#">Rs.{{this.price}}</a>
+             <input type="text" name="vendorId" id="{{this.vendor}}" value="{{this.vendor}}" hidden >
+             <button onclick="addToCart('{{this._id}}','{{this.vendorname}}')" class="btn btn-primary" style="background: black;font-size:smaller;color:white;font-weight:bold">Add to Cart</button>
+ 
+						</div>
+            </div><!-- end col -->
+             {{/each}}
+            </div><!-- end row -->
+        </div><!-- end container -->
+    </div><!-- end section -->
+
+

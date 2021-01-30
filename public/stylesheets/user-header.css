@@ -1,3 +1,4 @@
+@import url(https://fonts.googleapis.com/css?family=Luckiest+Guy);
 /*!
  * Bootstrap v4.1.0 (https://getbootstrap.com/)
  * Copyright 2011-2018 The Bootstrap Authors
@@ -310,14 +311,14 @@ a img.aligncenter {
 
 .navbar-dark{
     /* background: #e3d105; */
-    background: #fff;
+    background: black;
     border-bottom: 1px solid whitesmoke;
     /* height: 80px; */
     
 }
 
 .navbar-dark .navbar-nav .nav-link{
-	color: #000;
+	color: #fff;
 	letter-spacing: 1px;
 	font-size: 16px;
 	position: relative;
@@ -628,6 +629,10 @@ xclip
 
 .section.lb {
     background-color: #f2f3f5;
+    /* background-color: white; */
+    width: 100%;
+    background-image: url(/images/p.jpg); 
+    
 }
 
 .section.db {

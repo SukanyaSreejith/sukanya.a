@@ -1,26 +1,25 @@
-<section>
-       <div class="container" id="table-align">
+<div class="col-10" style="text-align: justify;margin-top:100px;">
 
-        <table class="table">
+  <table class="table">
   <thead>
     <tr>
-      <th><h1>ID</h1></th>
-      <th><h1>NAME</h1></th>
-      <th><h1>EMAIL ID</h1></th>
-      <th><h1>PHONE NO</h1></th>
-      <th><h1>ACTIONS</h1></th>
+      <th>ID</th>
+      <th>NAME</th>
+      <th>EMAIL ID</th>
+      <th>PHONE NO</th>
+      <th>ACTIONS</th>
     
     </tr>
   </thead>
   <tbody>
-     {{#each users}}
+  {{#each users}}
     <tr>
       <th scope="row">1</th>
       <td>{{this.name}}</td>
       <td>{{this.email}}</td>
       <td>{{this.mobile}}</td>
       <td>
-       <a href="/admin/delete-user/{{this._id}}" class="btn btn-danger" onclick="return confirm('Are you sure to delete {{this.name}}')">Delete</a>
+       <a href="/admin/delete-user/{{this._id}}" class="btn btn-danger" style="font-size: small;" onclick="return confirm('Are you sure to delete {{this.name}}')">Delete</a>
         </td>
     </tr>
     {{/each}}
@@ -28,6 +27,8 @@
   </tbody>
 </table>
     </div>
-</section>
+</div>
+
+
 
 

@@ -18,26 +18,20 @@ var instance = new Razorpay({
 
 module.exports={
     doSignup:(userData)=>{     
-        return new Promise(async(resolve,reject)=>{  
+    return new Promise(async(resolve,reject)=>{  
             
-            let user=await db.get().collection(collection.USER_COLLECTION).findOne({email:userData.email})
-           console.log("user");
-           console.log(user);
-            if(user!=null){
-                console.log("not null");
-                response.status=false
-            }else{
-                console.log("null");
-            userData.password=await bcrypt.hash(userData.password,10)
-            db.get().collection(collection.USER_COLLECTION).insertOne(userData).then((data)=>{
-            resolve(data.ops[0])   
-           
-            })
-        }
-     
-        resolve(response)
+    let user=await db.get().collection(collection.USER_COLLECTION).findOne({email:userData.email})
+    if(user!=null){
+      resolve({signupErr:true})      
+    }else{
+        userData.password=await bcrypt.hash(userData.password,10)
+        db.get().collection(collection.USER_COLLECTION).insertOne(userData).then((data)=>{
+        resolve(data.ops[0])   
         })
-    },
+    }
+})
+     
+},
     doLogin:(userData)=>{
         return new Promise(async(resolve,reject)=>{
             let loginStatus=false
@@ -75,8 +69,6 @@ module.exports={
     },
 
 addToCart:(proId,userId)=>{
-
- 
     return new Promise(async(resolve,reject)=>{
         let vname=await db.get().collection(collection.PRODUCT_COLLECTION).findOne({_id:objectId(proId)})
       
@@ -191,8 +183,8 @@ getCartProducts:(userId)=>{
                 $lookup:{
                      from:collection.PRODUCT_COLLECTION,
                      localField:'item',  //this data from cart collection,that is our input filed so calling local field.we want to search it for product collection.
-                     foreignField:'_id', //this field speicifies the name of local field used in p roduct collection.
-                     as:'product'  //array 
+                     foreignField:'_id', //this field speicifies the name of local field used in product collection.
+                     as:'product'  //object with full fields from product collection.
                     
                }
              },
@@ -204,7 +196,10 @@ getCartProducts:(userId)=>{
            
            
         ]).toArray()
-        //console.log(cartItems[0].product);
+        console.log("cart");
+        console.log(cartItems);
+       
+        // console.log(cartItems[0].product);
         resolve(cartItems) //needs only items
     })
 },
@@ -492,6 +487,20 @@ changePaymentStatus:(orderId)=>{
         ).then(()=>{
             resolve()
         })
+    })
+},
+
+getProdVendorwise:(vendor)=>{
+    return new Promise(async(resolve,reject)=>{
+        let products=await db.get().collection(collection.PRODUCT_COLLECTION).find({vendorname:vendor}).toArray()
+        resolve(products)
+    })
+},
+
+getAllProducts:()=>{
+    return new Promise(async(resolve,reject)=>{
+        let products=await db.get().collection(collection.PRODUCT_COLLECTION).find().toArray()
+        resolve(products)
     })
 }
 

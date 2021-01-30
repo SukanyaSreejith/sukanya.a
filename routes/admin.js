@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const adminHelpers = require('../helpers/admin-helpers');
+const vendorHelpers = require('../helpers/vendor-helpers');
 const { PreconditionFailed } = require('http-errors');
 
 const verifyLogin=(req,res,next)=>{
@@ -8,23 +9,36 @@ const verifyLogin=(req,res,next)=>{
     next()
   }else{
     let style="user-login.css"
-    res.render('admin/admin-login',{style,admin:true})
+    res.render('admin/admin-login',{style})
   }
 }
-
-router.get('/admin-dashboard', verifyLogin,(req,res)=>{
-  res.render('admin/admin-dashboard',{admin:true,admindashboard:true,tableStyle:true})
+router.get('/admin-home',(req,res)=>{
+  let style='user-home.css' 
+  res.render('admin/admin-home',{style})
+})
+router.get('/admin-dashboard',async(req,res)=>{
+  if(req.session.adminLoggedIn){
+    adminHelpers.getSalesDet().then((salesDet)=>{
+      res.render('admin/admin-dashboard',{admin:true,salesDet}) 
+      })
+     
+    }else{
+      req.session.adminLoginErr=true
+      let style="user-login.css"
+      res.render('admin/admin-login',{style})
+    }
 });
 
 router.get('/admin-login', function(req, res, next) {
   if(req.session.adminLoggedIn){
-    console.log("exists");
-   res.redirect('/admin/admin-dashboard')
-      
+    adminHelpers.getSalesDet().then((salesDet)=>{
+      res.render('admin/admin-dashboard',{admin:true,salesDet}) 
+      })
+     
     }else{
       req.session.adminLoginErr=true
       let style="user-login.css"
-      res.render('admin/admin-login',{admin:true,style})
+      res.render('admin/admin-login',{style})
     }
   
 });
@@ -35,7 +49,7 @@ router.post('/admin-login',(req,res)=>{
       req.session.admin=response.admin
       req.session.adminLoggedIn=true
       adminHelpers.getSalesDet().then((salesDet)=>{
-      res.render('admin/admin-dashboard',{admin:true,admindashboard:true,tableStyle:true,salesDet}) 
+      res.render('admin/admin-dashboard',{admin:true,salesDet}) 
       })
      }else{
       req.session.adminLoginErr=true
@@ -46,11 +60,9 @@ router.post('/admin-login',(req,res)=>{
 })
 
 router.get('/logout',(req,res)=>{
-  req.session.admin=null
-  
   req.session.adminLoggedIn=false
-  //req.session.destroy()
-  res.redirect('/admin/admin-login')
+  req.session.admin=null
+  res.redirect('/admin/admin-home')
 })
 
 
@@ -168,8 +180,11 @@ router.get('/delete-category/:id',(req,res)=>{
   })
 })
 
-
 });
+router.get('/view-orders',async(req,res)=>{
+  let orders=await vendorHelpers.getUserOrders()
+  res.render('admin/view-orders',{orders,admin:true})
+})
 
  
 module.exports = router;

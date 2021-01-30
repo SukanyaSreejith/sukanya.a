@@ -1,21 +1,64 @@
 
+    <!-- top navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top"> 
+        <a class="navbar-brand" href="/admin/admin-home">
+          	<img class="img-fluid" src="/images/LOGO.png" style="height: 5rem;">
+        </a> 
+        <!-- hamburger button that toggles the navbar-->
+        <button class="navbar-toggler" type="button" 
+            data-toggle="collapse" 
+            data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" 
+            aria-expanded="false" 
+            aria-label="Toggle navigation"> 
+            <span class="navbar-toggler-icon"> 
+            </span> 
+        </button> 
+        <!-- navbar links -->
+        <div class="collapse navbar-collapse" 
+                id="navbarNavAltMarkup"> 
+            <div class="navbar-nav"> 
+                <a class="nav-item nav-link  
+                    active" href="/admin/admin-home">Home</a> 
+                <a class="nav-item nav-link" 
+                    href="/admin/logout">Logout</a> 
+              
+        </div> 
+    </nav> 
+  
+    <!-- This container contains the sidebar 
+             and main content of the page -->
+    <!-- h-100 takes the full height of the body-->
+    <div class="container-fluid h-100"> 
+        <div class="row h-100"> 
+            <div class="col-2" id="black" > 
+                
+                <!-- Navigation links in sidebar-->
+                <a href="/admin/admin-dashboard">Admin Dashboard</a><br /> 
+                <br /> 
+                <a href="/admin/view-vendors">Vendor Management</a><br /> 
+                <br /> 
+                <a href="/admin/view-categories">Category Management</a><br /> 
+                <br /> 
+                <a href="/admin/view-orders">Order Management</a><br /> 
+                <br /> 
+                <a href="/admin/view-users">User Management</a><br /> 
+                <br /> 
+            </div> 
+           
 
-{{#if admindashboard}}
 
-<nav class="navbar navbar-light" style="background-color:white;color:black" >
-      <ul class="nav navbar-nav navbar-right">
-         <li><a href="/logout"><span class="glyphicon glyphicon-user" style="color: black;"></span> Logout</a></li>
-      </ul>
-  </div>
-</nav>
-<div class="sidebar">
-  <ul>
-    <li><a href="/admin/admin-login">Admin Home</a> </li>
-    <li><a href="/admin/view-vendors">Vendor Management</a> </li>
-    <li><a href="/admin/view-categories">Category Management</a> </li>
-    <li><a href="/admin/view-orders"></i>Order Management</a> </li>
-    <li><a href="/admin/view-users">User Management</a> </li>
-    
-  </ul>
-</div>
-{{/if}}
+    <style type="text/css"> 
+       
+        #black { 
+            height: 100%; 
+            background: black; 
+            text-align: left; 
+            margin-top: 80px;
+        } 
+        .col-2 a{
+          color: white;
+          font-weight: bold;
+        }
+
+    </style> 

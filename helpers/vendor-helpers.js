@@ -44,9 +44,9 @@ doLogin:(vendorData)=>{
     })
 },
 
-getAllProducts:()=>{
+getAllProducts:(vendor)=>{
     return new Promise(async(resolve,reject)=>{
-        let products=await db.get().collection(collection.PRODUCT_COLLECTION).find().toArray()
+        let products=await db.get().collection(collection.PRODUCT_COLLECTION).find({vendorname:vendor}).toArray()
         resolve(products)
     })
 },
@@ -86,8 +86,10 @@ updateProduct:(proId,proDetails)=>{
             $set:{
                 name:proDetails.name,
                 description:proDetails.description,
-                price:proDetails.price,
-                category:proDetails.category
+                price:parseInt(proDetails.price),
+                category:proDetails.category,
+                quantity:parseInt(proDetails.quantity),
+                vendorname:proDetails.vendorname
             }
             
         }).then((response)=>{
@@ -106,9 +108,7 @@ getUserOrders:()=>{
     })
 },
 getSalesDet:(vendorId)=>{
-  
       return new Promise(async(resolve,reject)=>{
-
       let vendor =await db.get().collection(collection.VENDOR_COLLECTION).findOne({_id:objectId(vendorId)})
       let vendorName=vendor.shopname
     
@@ -117,7 +117,6 @@ getSalesDet:(vendorId)=>{
             $match:{vendorname:vendorName}
           }
       ]).toArray()
-  
 
       let orders=await db.get().collection(collection.ORDER_COLLECTION).find({
       "products.vendor" : vendorName
@@ -145,22 +144,10 @@ getSalesDet:(vendorId)=>{
             
             for(j=0;j<proArray.length;j++){
               
-                //    var proExist = proList.findIndex(function(post, index) {
-                //     if(post.item===proArray[j].item){
-                //         console.log("yes");
-                //     }else{
-                //         console.log("no");
-                //     }
-                //     return true;
-                  
-                // });
-           
                       console.log(proList);
                       console.log(proArray[j].item);
                     proExist = proList.findIndex(x => x.item ===proArray[j].item);
-                console.log(proExist);
-                   
-               
+                              
                 if(proExist!=-1){
                   proList[proExist].quantity=proList[proExist].quantity+ proArray[j].quantity
                 
@@ -174,10 +161,7 @@ getSalesDet:(vendorId)=>{
                 }    
                     
             }
-            console.log("list");
-            console.log(proList);
-           
-        
+                  
            totAmount=totAmount+ orders[i].totalAmount
            date=orders[i].date
            month=months[date.getMonth()]
@@ -203,9 +187,57 @@ getSalesDet:(vendorId)=>{
       }
       resolve(salesObj)
 
-
     })
 
+},
+salesReport:(vendorName,dateDetails)=>{
+    console.log(dateDetails);
+    return new Promise(async(resolve,reject)=>{   
+        let reportData=await db.get().collection(collection.ORDER_COLLECTION).aggregate([
+            // {
+            //     $match:{'products.vendor':vendorName}
+
+            // }
+            {
+                $unwind:'$products'   //same user same cart id for each products
+            },
+            {
+                $match:{'products.vendor':vendorName}
+            },
+            {
+                $project:{
+                    item:'$products.item',
+                    quantity:'$products.quantity',
+                    totalAmount:1
+                }
+            },
+            {
+                $lookup:{
+                     from:collection.PRODUCT_COLLECTION,
+                     localField:'item',  //this data from cart collection,that is our input filed so calling local field.we want to search it for product collection.
+                     foreignField:'_id', //this field speicifies the name of local field used in p roduct collection.
+                     as:'product'  //array 
+                    
+               }
+             },
+             {
+                $project:{
+                    item:1,quantity:1,product:{$arrayElemAt:['$product',0]}
+                }
+             },     
+            {
+                $group: {
+                  _id: "$item",
+                  totalQty: { $sum: { $multiply: [ "$quantity", 1 ] } },
+                  totalSaleAmount: { $sum: { $multiply: [ "$quantity","$product.price"  ] } }
+                
+               }
+            }  
+
+        ]).toArray()
+        console.log("order file");
+        console.log(reportData);
+    })
 }
 
 }
